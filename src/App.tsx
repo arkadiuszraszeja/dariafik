@@ -1,11 +1,11 @@
 import html2canvas from 'html2canvas';
-import React, { ChangeEventHandler, DetailedHTMLProps, ReactInstance, RefObject, SelectHTMLAttributes, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Calendar from './components/Calendar'
 
 function App() {
   const date = new Date();
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
   const [currentMonth, setCurrentMonth] = useState<number>(month);
   const [currentYear, setCurrentYear] = useState<number>(year);
@@ -17,7 +17,7 @@ function App() {
   }
   const print = async () =>{
     setHideButtons(true);
-    setHideButtons(true);
+    // setHideButtons(true);
     const element = document.getElementById('print');
     if(element== null) return;
     const canvas = await html2canvas(element);
@@ -44,7 +44,7 @@ function App() {
   return (
     <div className="App">
         <input defaultValue={currentYear} onChange={onCurrentYearChange} style={{display:"block"}}/>
-        <select defaultValue={currentMonth} onChange={onMonthChange} style={{display:"block"}}>          
+        <select defaultValue={currentMonth -1} onChange={onMonthChange} style={{display:"block"}}>          
           {months.map((x, index) => {
             return (<option value={index} key={index}>{x}</option>);
           })}

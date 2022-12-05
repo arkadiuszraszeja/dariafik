@@ -27,8 +27,13 @@ const Calendar : FC<ICalendar> = (calendar : ICalendar) => {
     const [weeks, setWeeks] = useState<IWeek[]>(getWeeks(calendar.month, calendar.year))
     const daysOfTheWeek = ["poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"];
 
+    console.log("month");
+    console.log(calendar.month);
+    console.log(calendar.monthName);
+
+
     return (<div style={{marginLeft:20, marginTop:20, width:1100, paddingLeft:35, paddingBottom:30}} id="print">
-        <div style={{width:1050, fontSize:28, verticalAlign:"middle", marginBottom:"5px"}}><b>{calendar.monthName}</b></div>
+        <div style={{width:1050, fontSize:28, verticalAlign:"middle", marginBottom:"5px"}}><b>{calendar.monthName.toUpperCase()}</b></div>
 
         <div style={{textAlign:'left'}}>
             <div>

@@ -29,7 +29,7 @@ export default function getCalendar(month : number, year : number) {
 }
 
 function getNumberOfInactive(firstDay : Date){
-    if(firstDay.getDay() == 0) return 6;
+    if(firstDay.getDay() === 0) return 6;
 
     return firstDay.getDay()-1;
 }

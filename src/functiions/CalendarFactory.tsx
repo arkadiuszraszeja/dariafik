@@ -28,11 +28,9 @@ export default function getCalendar(month : number, year : number) {
     return results
 }
 
-function getNumberOfInactive(firstDay : Date){
-    if(firstDay.getDay() === 0) return 6;
-
-    return firstDay.getDay()-1;
-}
+const getNumberOfInactive = (firstDay : Date) => 
+    firstDay.getDay() === 0 ?
+    6 : firstDay.getDay()-1;
 
 function getInactive(firstDay : Date){
     let results = [];
@@ -49,28 +47,16 @@ function getInactive(firstDay : Date){
     return results;
 }
 
-function getLastDayOfPreviousMonth(month : number, year : number){
-    console.log("getLastDayOfPreviousMonth");
-    console.log(month);
-    console.log(year);
+const getLastDayOfPreviousMonth = (month : number, year : number) => 
+    month == 0 ?
+        getLastDay(12, year - 1)
+        :
+        getLastDay(month, year);
 
-    if(month == 0) return getLastDay(12, year - 1);
-    return getLastDay(month, year);
-}
+const getLastDay = (month : number, year : number) => new Date(year, month, 0).getDate();
 
-function getLastDay(month : number, year : number){
-    console.log("getLastDay");
-    console.log(month);
-    console.log(year);
-    console.log(new Date(year, month, 0));
-    console.log(new Date(year, month, 0).getDate());
 
-   return new Date(year, month, 0).getDate();
-}
-
-function getFirstDay(month : number, year : number){
-    return new Date(year, month - 1, 1);
-}
+const getFirstDay = (month : number, year : number) => new Date(year, month - 1, 1);
 
 function getDayOfTheWeek(day: number, month : number, year : number){
     let date : Date = new Date();

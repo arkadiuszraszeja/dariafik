@@ -19,7 +19,7 @@ export default function getCalendar(month : number, year : number) {
     let results: IDay[] = getInactive(firstDay);
     
     let lastDay = getLastDay(month, year);
-
+    
     for(let i = 1; i <= lastDay; i++){
         let day :IDay = {day : i, active : true, dayOfWeek : getDayOfTheWeek(i, month - 1, year), hideButtons:false};
         results.push(day);
@@ -37,28 +37,39 @@ function getNumberOfInactive(firstDay : Date){
 function getInactive(firstDay : Date){
     let results = [];
     let noOfInactive = getNumberOfInactive(firstDay);
-    let lastDate = getLastDay(firstDay.getMonth() - 1, firstDay.getFullYear());
+    let lastDate =getLastDayOfPreviousMonth(firstDay.getMonth(), firstDay.getFullYear());
+
     let firstDate = lastDate - noOfInactive + 1;
     let index = 0;
     for(let i = firstDate; i <= lastDate; i++){
-        let day :IDay = {day : i, active : false, dayOfWeek :  ++index, hideButtons:false};//getDayOfTheWeek(i, firstDay.getMonth() - 1, firstDay.getFullYear())};
+        let day :IDay = {day : i, active : false, dayOfWeek :  ++index, hideButtons:false};
         results.push(day)
     }
 
     return results;
 }
 
-function getLastDay(month : number, year : number){
-   let day : Date = getFirstDay(month -1 , year);
-   day.setDate(day.getDate() - 1);
+function getLastDayOfPreviousMonth(month : number, year : number){
+    console.log("getLastDayOfPreviousMonth");
+    console.log(month);
+    console.log(year);
 
-   return day.getDate();
+    if(month == 0) return getLastDay(12, year - 1);
+    return getLastDay(month, year);
+}
+
+function getLastDay(month : number, year : number){
+    console.log("getLastDay");
+    console.log(month);
+    console.log(year);
+    console.log(new Date(year, month, 0));
+    console.log(new Date(year, month, 0).getDate());
+
+   return new Date(year, month, 0).getDate();
 }
 
 function getFirstDay(month : number, year : number){
-    let firstDay: Date = new Date();
-    firstDay.setFullYear(year, month - 1, 1);
-    return firstDay;
+    return new Date(year, month - 1, 1);
 }
 
 function getDayOfTheWeek(day: number, month : number, year : number){

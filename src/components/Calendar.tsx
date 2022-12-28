@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
-import getCalendar, { getWeeks } from '../functiions/CalendarFactory';
+import React, { FC, useEffect, useState } from 'react';
+import { getWeeks } from '../functiions/CalendarFactory';
 import IWeek from '../models/week';
-import { Day, IDay } from './Day';
 import Week from './Week';
 
 interface ICalendar {
@@ -26,11 +25,6 @@ const Calendar : FC<ICalendar> = (calendar : ICalendar) => {
 
     const [weeks, setWeeks] = useState<IWeek[]>(getWeeks(calendar.month, calendar.year))
     const daysOfTheWeek = ["poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"];
-
-    console.log("month");
-    console.log(calendar.month);
-    console.log(calendar.monthName);
-
 
     return (<div style={{marginLeft:20, marginTop:20, width:1100, paddingLeft:35, paddingBottom:30}} id="print">
         <div style={{width:1050, fontSize:28, verticalAlign:"middle", marginBottom:"5px"}}><b>{calendar.monthName.toUpperCase()}</b></div>
